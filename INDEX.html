@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لیستوفر سازه‌های بتنی</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f0f2f5;--panel:#ffffff;--ink:#242424;--muted:#616161;--line:#d1d1d1;
+  --steel:#0f6cbd;--steel-ink:#ffffff;--signal:#0f6cbd;--signal-ink:#ffffff;--field:#ffffff;--danger:#b10e1c;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1f1f1f;--panel:#292929;--ink:#f5f5f5;--muted:#adadad;--line:#424242;--steel:#479ef5;--steel-ink:#0a0a0a;--signal:#479ef5;--signal-ink:#0a0a0a;--field:#333333;--danger:#f1707b}
+}
+:root[data-theme="dark"]{--bg:#1f1f1f;--panel:#292929;--ink:#f5f5f5;--muted:#adadad;--line:#424242;--steel:#479ef5;--steel-ink:#0a0a0a;--signal:#479ef5;--signal-ink:#0a0a0a;--field:#333333;--danger:#f1707b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.7 "Segoe UI Variable Text","Segoe UI","Vazirmatn",Tahoma,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 48px}
+.sheet{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0;box-shadow:0 2px 4px rgba(0,0,0,.14),0 0 2px rgba(0,0,0,.12);overflow-x:auto}
+.hd{width:100%;min-width:760px;border-collapse:collapse;direction:ltr;table-layout:fixed}
+.hd td{border:1px solid var(--line);text-align:center;padding:5px 4px;font-size:13px;line-height:1.5;vertical-align:middle;word-break:break-word}
+.hd .lab{font-weight:600}
+.hd .val{font-weight:600;font-size:14px;padding:8px 4px}
+.hd .holding{font-weight:800;font-size:12px}
+.hd h1{margin:0;font-size:22px;font-weight:800;line-height:1.5}
+.hd [contenteditable]:focus,.hd .logo:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
+.hd .logo{cursor:pointer;height:96px;padding:4px;color:var(--muted);font-size:12px}
+.hd .logo img{max-width:100%;max-height:88px;display:block;margin:auto}
+section{background:var(--panel);margin-top:16px;padding:20px;border-radius:8px;border:1px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,.1),0 0 2px rgba(0,0,0,.08)}
+h2{margin:0 0 4px;font-size:18px;font-weight:800}
+.hint{margin:0 0 12px;color:var(--muted);font-size:13px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{font-weight:600;font-size:13px;text-align:center;padding:6px 6px;border-bottom:2px solid var(--ink);white-space:nowrap}
+td{padding:4px 4px;border-bottom:1px solid var(--line)}
+input,select{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-bottom-color:#8a8a8a;border-radius:4px;padding:6px 10px;min-width:62px}
+input.name{min-width:130px}
+input:focus,select:focus{outline:none;border-bottom:2px solid var(--signal);padding-bottom:5px}
+button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+td.out{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;text-align:center;direction:ltr;padding-inline:8px}
+input[type=number]{direction:ltr;text-align:center}
+button{font:inherit;cursor:pointer;border-radius:4px;border:1px solid var(--line);background:var(--field);color:var(--ink);padding:6px 20px;font-weight:600;transition:background .1s}
+button:hover{background:var(--bg)}
+button:active{background:var(--line)}
+button.add{background:var(--signal);border-color:var(--signal);color:var(--signal-ink);margin-top:10px}
+button.add:hover{background:var(--signal);filter:brightness(.9)}
+button.add:active{background:var(--signal);filter:brightness(.8)}
+button.del{border:none;box-shadow:none;background:transparent;color:var(--danger);padding:2px 8px;font-size:18px;line-height:1}
+.tot{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:12px;padding-top:10px;border-top:2px solid var(--ink);font-weight:600}
+.tot span b{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.waste{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.waste input{width:80px}
+.big{font-size:22px;font-weight:800}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
+.scroll tbody tr:hover td{background:var(--bg)}
+.flow{min-width:0}
+.flow,.flow>tbody,.flow>tbody>tr,.flow>tbody>tr>td{display:block;padding:0;border:0}
+.flow>thead,.flow>tfoot,.sigs{display:none}
+@page{size:A4;margin:0}
+@media print{
+:root:root:root{padding:0;--bg:#fff;--panel:#fff;--ink:#000;--muted:#444;--line:#999;--field:#fff}
+body{background:#fff}
+.noprint,button,.del{display:none!important}
+section{box-shadow:none;border:none;border-radius:0;background:none;padding:0;margin-top:10px}
+input,select{border:none;box-shadow:none;background:transparent;-webkit-appearance:none;appearance:none;padding:0}
+.scroll,.sheet{overflow:visible;box-shadow:none}
+table,.hd{min-width:0!important}
+.hd .logo span{display:none}
+body{font-size:12px;line-height:1.5}
+.wrap{max-width:none;padding:0 10mm}
+header.sheet{position:fixed;top:10mm;left:10mm;right:10mm;height:42mm;border:1px solid #000;border-radius:0;background:#fff;z-index:2}
+.hd{height:100%;table-layout:fixed}
+.hd td{border-color:#000;padding:2px 3px;font-size:11px}
+.hd .val{font-size:12px;padding:3px}
+.hd h1{font-size:18px}
+.hd .logo{height:auto;padding:2px}
+.hd .logo img{max-height:17mm}
+.flow{display:table;width:100%}
+.flow>thead{display:table-header-group}
+.flow>tfoot{display:table-footer-group}
+.flow>tbody{display:table-row-group}
+.flow>thead>tr,.flow>tfoot>tr,.flow>tbody>tr{display:table-row;break-inside:auto}
+.flow>thead>tr>td,.flow>tfoot>tr>td,.flow>tbody>tr>td{display:table-cell}
+.spH{height:60mm}
+.spF{height:48mm}
+.sigs{display:flex;direction:rtl;justify-content:space-between;align-items:stretch;position:fixed;left:10mm;right:10mm;bottom:10mm;height:30mm;padding:3mm 5mm;border:1px solid #000;background:#fff;z-index:2}
+.sig{width:25%;border:1px solid #000;border-radius:18px;padding:4px 8px;font-size:12px;font-weight:700;text-align:center}
+h2{font-size:14px;margin:0 0 4px}
+.hint{display:none}
+.scroll tr{break-inside:avoid}
+.scroll table{min-width:0;font-size:12px}
+.scroll td,.scroll th{padding:3px 6px}
+#rb td:last-child,table:has(#rb) thead th:last-child{display:none}
+input[type=number]::-webkit-inner-spin-button{display:none}
+.waste input{width:auto;min-width:0;text-align:right}
+.tot{margin-top:6px;padding-top:6px}
+.note{font-size:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="sheet">
+<table class="hd">
+<tr>
+<td colspan="2" dir="rtl" class="holding" contenteditable="true">هلدینگ<br>تخصصی نفت،<br>گاز و پتروشیمی</td>
+<td colspan="6" dir="rtl"><h1 contenteditable="true">لیستوفر سازه‌های بتنی</h1></td>
+<td colspan="2" class="logo" id="logoCell" tabindex="0" role="button" aria-label="افزودن لوگو"><span>افزودن لوگو</span></td>
+</tr>
+<tr>
+<td rowspan="2" class="lab">Date:</td><td rowspan="2" class="lab">Page:</td>
+<td colspan="5" class="lab">Document Code:</td>
+<td rowspan="2" class="lab">Process<br>Group:</td><td rowspan="2" class="lab">Knowledge Area:</td><td rowspan="2" class="lab">Project:</td>
+</tr>
+<tr><td class="lab">Proj.Code:</td><td class="lab">Process:</td><td class="lab">Doc.Type:</td><td class="lab">Seq.No:</td><td class="lab">Rev:</td></tr>
+<tr>
+<td class="val" contenteditable="true">1404/09/01</td><td class="val" contenteditable="true">1 of 1</td>
+<td class="val" contenteditable="true">DMP</td><td class="val" contenteditable="true">TE</td><td class="val" contenteditable="true">F</td><td class="val" contenteditable="true">0007</td><td class="val" contenteditable="true">01</td>
+<td class="val" contenteditable="true">Planning</td><td class="val" contenteditable="true">Technical Mng</td><td class="val" contenteditable="true">All Projects</td>
+</tr>
+</table>
+<input id="logoFile" type="file" accept="image/*" hidden>
+</header>
+<div class="noprint"><button class="add" id="printBtn">پرینت</button></div>
+<table class="flow"><thead><tr><td><div class="spH"></div></td></tr></thead><tbody><tr><td>
+
+<section>
+  <h2>فهرست میلگرد</h2>
+  <p class="hint">هر ردیف یک گروه میلگرد است. طول کل = تعداد المان × تعداد میلگرد در هر المان × طول هر میلگرد. وزن هر متر = قطر² ÷ ۱۶۲ (کیلوگرم).</p>
+  <div class="scroll"><table>
+    <thead><tr><th>عنوان المان / مشخصات</th><th>قطر (mm)</th><th>تعداد المان</th><th>میلگرد در هر المان</th><th>طول هر میلگرد (m)</th><th>طول کل (m)</th><th>وزن (kg)</th><th></th></tr></thead>
+    <tbody id="rb"></tbody>
+  </table></div>
+  <button class="add" id="addRb">افزودن ردیف میلگرد</button>
+</section>
+
+<section>
+  <h2>جمع میلگرد به تفکیک قطر</h2>
+  <div class="waste"><label for="waste">درصد پرت و وصله</label><input id="waste" type="number" min="0" max="50" step="0.5" value="5"><span>٪</span></div>
+  <div class="scroll"><table style="min-width:520px">
+    <thead><tr><th>قطر (mm)</th><th>طول (m)</th><th>وزن خالص (kg)</th><th>وزن با پرت (kg)</th><th>شاخه ۱۲ متری</th></tr></thead>
+    <tbody id="sum"></tbody>
+  </table></div>
+  <div class="tot"><span>جمع وزن خالص: <b id="tNet">0</b> kg</span><span class="big">جمع با پرت: <b id="tWaste">0</b> kg (<b id="tTon">0</b> تن)</span></div>
+</section>
+
+<p class="note">مقادیر اولیه نمونه هستند؛ آن‌ها را با نقشه پروژه جایگزین کنید. این محاسبه برای برآورد و متره است و جایگزین جزئیات اجرایی نقشه‌های سازه نیست.</p>
+</td></tr></tbody><tfoot><tr><td><div class="spF"></div></td></tr></tfoot></table>
+<div class="sigs"><div class="sig"><b contenteditable="true">پیمانکار</b></div><div class="sig"><b contenteditable="true">واحد فنی کارفرما</b></div></div>
+</div>
+
+<script>
+var DIAS=[6,8,10,12,14,16,18,20,22,25,28,32];
+var RB=[["فونداسیون F1 - شبکه پایین",8,22,12,3.2],["ستون C1 - آرماتور طولی",8,16,12,3.4],["ستون C1 - خاموت",8,10,22,1.2],["تیر B1 - پایین",6,14,3,6.1]];
+var rbData=[[ "فونداسیون F1 - شبکه پایین",16,8,22,3.2],["ستون C1 - آرماتور طولی",18,8,12,3.4],["ستون C1 - خاموت",8,8,22,1.2],["تیر B1 - آرماتور پایین",18,4,3,6.1]];
+var $=function(i){return document.getElementById(i)};
+function num(v){var n=parseFloat(v);return isFinite(n)&&n>0?n:0}
+function f(n,d){return n.toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d})}
+function td(html,cls){var c=document.createElement("td");if(cls)c.className=cls;c.innerHTML=html;return c}
+function numIn(v){return '<input type="number" min="0" step="any" value="'+v+'">'}
+function save(){try{localStorage.setItem("listofer",JSON.stringify({rb:read("rb",true),w:$("waste").value}))}catch(e){}}
+function read(id,isRb){return Array.prototype.map.call($(id).rows,function(r){var i=r.querySelectorAll("input,select");return Array.prototype.map.call(i,function(x){return x.value})})}
+function addRb(v){
+  var tr=document.createElement("tr");
+  var sel='<select>'+DIAS.map(function(d){return '<option'+(d==v[1]?' selected':'')+'>'+d+'</option>'}).join("")+'</select>';
+  tr.appendChild(td('<input class="name" type="text" value="'+v[0]+'">'));
+  tr.appendChild(td(sel));
+  tr.appendChild(td(numIn(v[2])));tr.appendChild(td(numIn(v[3])));tr.appendChild(td(numIn(v[4])));
+  tr.appendChild(td("0","out"));tr.appendChild(td("0","out"));
+  tr.appendChild(td('<button class="del" title="حذف ردیف" aria-label="حذف ردیف">×</button>'));
+  $("rb").appendChild(tr);
+}
+function calc(){
+  var w=num($("waste").value)/100,by={},net=0;
+  Array.prototype.forEach.call($("rb").rows,function(r){
+    var c=r.cells,d=parseInt(c[1].firstChild.value,10);
+    var L=num(c[2].firstChild.value)*num(c[3].firstChild.value)*num(c[4].firstChild.value);
+    var kg=L*d*d/162;
+    c[5].textContent=f(L,2);c[6].textContent=f(kg,2);
+    if(L>0){by[d]=by[d]||{L:0,kg:0};by[d].L+=L;by[d].kg+=kg;net+=kg}
+  });
+  var h="";
+  DIAS.forEach(function(d){var o=by[d];if(!o)return;
+    h+="<tr><td class='out'>Ø"+d+"</td><td class='out'>"+f(o.L,2)+"</td><td class='out'>"+f(o.kg,1)+"</td><td class='out'>"+f(o.kg*(1+w),1)+"</td><td class='out'>"+Math.ceil(o.L*(1+w)/12)+"</td></tr>"});
+  $("sum").innerHTML=h||"<tr><td colspan='5' style='padding:12px;color:var(--muted)'>ردیف میلگرد با طول بزرگ‌تر از صفر وارد کنید.</td></tr>";
+  $("tNet").textContent=f(net,1);$("tWaste").textContent=f(net*(1+w),1);$("tTon").textContent=f(net*(1+w)/1000,3);
+  save();
+}
+function wire(id){
+  $(id).addEventListener("input",calc);$(id).addEventListener("change",calc);
+  $(id).addEventListener("click",function(e){if(e.target.classList.contains("del")){e.target.closest("tr").remove();calc()}});
+}
+var saved=null;try{saved=JSON.parse(localStorage.getItem("listofer")||"null")}catch(e){}
+if(saved&&saved.rb&&saved.rb.length){
+  saved.rb.forEach(function(r){addRb([r[0],r[1],r[2],r[3],r[4]])});
+  if(saved.w!=null)$("waste").value=saved.w;
+}else{rbData.forEach(addRb)}
+wire("rb");$("waste").addEventListener("input",calc);
+$("addRb").onclick=function(){addRb(["",12,1,1,1]);calc()};
+$("printBtn").onclick=function(){try{window.print()}catch(e){}};
+var lf=$("logoFile"),lc=$("logoCell");
+lc.onclick=function(){lf.click()};
+lc.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();lf.click()}};
+lf.onchange=function(){var fl=lf.files[0];if(!fl)return;var r=new FileReader();r.onload=function(){lc.innerHTML='<img alt="لوگو" src="'+r.result+'">'};r.readAsDataURL(fl)};
+calc();
+</script>
+</body>
+</html>
